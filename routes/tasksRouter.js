@@ -4,7 +4,7 @@ const router = express.Router();
 
 //GET tasks
 router.get('/', (req, res) => {
-    Tasks.find()
+    Tasks.getTasks()
         .then(Tasks => {
             res.status(200).json(Tasks);
         })
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 //POST tasks
 router.post('/', (req, res) => {
     const task = req.body;
-    Tasks.add(task)
+    Tasks.addTask(task)
         .then(Task => {
             res.status(201).json(Task);
         })
