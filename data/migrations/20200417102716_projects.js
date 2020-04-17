@@ -15,23 +15,23 @@ exports.up = function (knex) {
             tbl.integer('project_id').references('id').inTable('projects').unsigned().notNullable()
         })
 
+         .createTable('resources', tbl => {
+            tbl.increments()
+            tbl.string('name', 100).notNullable().unique()
+            tbl.text('description', 255)
+        })
+
         .createTable('project_resources', tbl => {
             tbl.integer('project_id').unsigned().notNullable().references('id').inTable('projects')
             tbl.integer('resource_id').unsigned().notNullable().references('id').inTable('resources')
             tbl.primary(['project_id', 'resource_id']);
         })
-
-        .createTable('resources', tbl => {
-            tbl.increments()
-            tbl.string('name', 100).notNullable().unique()
-            tbl.text('description', 255)
-        })
 };
 
 exports.down = function (knex) {
     return knex.schema
-        .dropTableIfExists('resources')
         .dropTableIfExists('project_resources')
+        .dropTableIfExists('resources')
         .dropTableIfExists('tasks')
         .dropTableIfExists('projects');
 };
