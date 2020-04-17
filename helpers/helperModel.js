@@ -14,12 +14,6 @@ function getProjects() {
     return db('projects');
 }
 
-// function findById(id) {
-//     return db('projects')
-//         .where({ id })
-//         .first();
-// }
-
 function addProject(project) {
     return db('projects')
         .insert(project)
