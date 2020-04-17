@@ -43,7 +43,9 @@ function addResource(resource) {
 
 //tasks
 function getTasks() {
-    return db('tasks');
+    return db('tasks as t')
+    .join('projects as p', 'p.id', 't.project_id')
+    .select('p.name as project_name', 'p.description as project_description', 't.project_id', 't.id', 't.description', 't.notes', 't.completed');
 }
 
 // function findById(id) {
